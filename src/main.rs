@@ -29,13 +29,13 @@ fn step(start: usize, program: &[Fraction]) -> usize {
             return start / den * num;
         }
     }
-    return start;
+    start
 }
 
 fn main() {
     let mut start = 2;
-    for i in 0..20 {
-        println!("{}", start);
+    for _ in 0..20 {
+        println!("{start}");
         start = step(start, &PRIMEGAME);
     }
 }
