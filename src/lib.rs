@@ -2,14 +2,8 @@
 use std::fmt::Debug;
 
 pub struct Fraction {
-    num: usize,
-    den: usize,
-}
-
-impl Fraction {
-    pub const fn new(num: usize, den: usize) -> Self {
-        Self { num, den }
-    }
+    pub num: usize,
+    pub den: usize,
 }
 
 impl Debug for Fraction {
@@ -19,9 +13,13 @@ impl Debug for Fraction {
 }
 
 #[macro_export]
-macro_rules! f {
-    ($n:literal/$d:literal) => {
-        Fraction::new($n, $d)
+macro_rules! fractran {
+    ($( $n:literal/$d:literal) *) => {
+        [
+          $(
+              Fraction{ num:$n, den:$d},
+          )*
+        ]
     };
 }
 
