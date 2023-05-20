@@ -1,36 +1,4 @@
-use std::fmt::Debug;
-
-struct Fraction {
-    num: usize,
-    den: usize,
-}
-
-impl Fraction {
-    const fn new(num: usize, den: usize) -> Self {
-        Self { num, den }
-    }
-}
-
-impl Debug for Fraction {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}/{}", self.num, self.den)
-    }
-}
-
-macro_rules! f {
-    ($n:literal/$d:literal) => {
-        Fraction::new($n, $d)
-    };
-}
-
-fn step(start: usize, program: &[Fraction]) -> usize {
-    for Fraction { num, den } in program {
-        if start % den == 0 {
-            return start / den * num;
-        }
-    }
-    start
-}
+use fractran_rs::*;
 
 fn main() {
     let mut start = 2;
