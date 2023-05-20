@@ -24,6 +24,10 @@ impl<'a> FractranProgram<'a> {
             instructions,
         }
     }
+
+    pub fn run(self) -> usize {
+        self.last().unwrap()
+    }
 }
 
 #[macro_export]
