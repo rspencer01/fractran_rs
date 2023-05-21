@@ -1,33 +1,47 @@
 #![macro_use]
 
+use std::marker::PhantomData;
+
 pub struct Fraction {
     pub num: usize,
     pub den: usize,
 }
 
-pub struct FractranProgram<'a> {
+pub struct FractranProgram<'a, I = usize, O = usize>
+where
+    I: Into<usize>,
+    O: From<usize>,
+{
     instructions: &'a [Fraction],
+    _phantom: PhantomData<(I, O)>,
 }
 
-pub struct FractranRun<'a> {
+pub struct FractranRun<'a, I, O>
+where
+    I: Into<usize>,
+    O: From<usize>,
+{
     current: usize,
-    program: &'a FractranProgram<'a>,
+    program: &'a FractranProgram<'a, I, O>,
 }
 
-impl<'a> FractranProgram<'a> {
+impl<'a, I: Into<usize>, O: From<usize>> FractranProgram<'a, I, O> {
     pub const fn new(instructions: &'a [Fraction]) -> Self {
-        Self { instructions }
+        Self {
+            instructions,
+            _phantom: PhantomData,
+        }
     }
 
-    pub fn start(&'a self, start: usize) -> FractranRun<'a> {
+    pub fn start(&'a self, start: I) -> FractranRun<'a, I, O> {
         FractranRun {
-            current: start,
+            current: start.into(),
             program: self,
         }
     }
 
-    pub fn run(&self, start: usize) -> usize {
-        self.start(start).last().unwrap()
+    pub fn run(&self, start: I) -> O {
+        self.start(start).last().unwrap().into()
     }
 }
 
@@ -38,7 +52,11 @@ macro_rules! fractran {
     };
 }
 
-impl<'a> Iterator for FractranRun<'a> {
+impl<'a, I, O> Iterator for FractranRun<'a, I, O>
+where
+    I: Into<usize>,
+    O: From<usize>,
+{
     type Item = usize;
 
     fn next(&mut self) -> Option<Self::Item> {
