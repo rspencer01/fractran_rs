@@ -6,47 +6,51 @@ pub struct Fraction {
 }
 
 pub struct FractranProgram<'a> {
-    start: usize,
     instructions: &'a [Fraction],
 }
 
+pub struct FractranRun<'a> {
+    current: usize,
+    program: &'a FractranProgram<'a>,
+}
+
 impl<'a> FractranProgram<'a> {
-    pub const fn new(start: usize, instructions: &'a [Fraction]) -> Self {
-        Self {
-            start,
-            instructions,
+    pub const fn new(instructions: &'a [Fraction]) -> Self {
+        Self { instructions }
+    }
+
+    pub fn start(&'a self, start: usize) -> FractranRun<'a> {
+        FractranRun {
+            current: start,
+            program: self,
         }
     }
 
-    pub fn run(self) -> usize {
-        self.last().unwrap()
+    pub fn run(&self, start: usize) -> usize {
+        self.start(start).last().unwrap()
     }
 }
 
 #[macro_export]
 macro_rules! fractran {
-    ($s:literal | $( $n:literal/$d:literal) *) => {
-        FractranProgram::new($s,&[
-          $(
-              Fraction{ num:$n, den:$d},
-          )*
-        ])
+    ($( $n:literal/$d:literal) *) => {
+        FractranProgram::new(&[$(Fraction{ num:$n, den:$d},)*])
     };
 }
 
-impl<'a> Iterator for FractranProgram<'a> {
+impl<'a> Iterator for FractranRun<'a> {
     type Item = usize;
 
     fn next(&mut self) -> Option<Self::Item> {
         let next = 'nxt: {
-            for Fraction { num, den } in self.instructions {
-                if self.start % den == 0 {
-                    break 'nxt Some(self.start / den * num);
+            for Fraction { num, den } in self.program.instructions {
+                if self.current % den == 0 {
+                    break 'nxt Some(self.current / den * num);
                 }
             }
             None
         };
-        self.start = next.unwrap_or(self.start);
+        self.current = next.unwrap_or(self.current);
         next
     }
 }
