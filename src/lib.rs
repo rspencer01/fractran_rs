@@ -1,15 +1,8 @@
 #![macro_use]
-use std::fmt::Debug;
 
 pub struct Fraction {
     pub num: usize,
     pub den: usize,
-}
-
-impl Debug for Fraction {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}/{}", self.num, self.den)
-    }
 }
 
 pub struct FractranProgram<'a> {
