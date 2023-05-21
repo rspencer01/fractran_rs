@@ -13,7 +13,7 @@ struct AddOutput(u32);
 
 impl From<usize> for AddOutput {
     fn from(value: usize) -> Self {
-        AddOutput(value.trailing_zeros())
+        AddOutput(value.ilog(2))
     }
 }
 
