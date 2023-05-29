@@ -78,8 +78,14 @@ for intermediate_result in program.start(3) {
 }
 ```
 
+## :art: Prior art and alternatives
+You may be intersted in [`fractran`](https://crates.io/crates/fractran) and [`fractran_macros`](https://crates.io/crates/fractran_macros) if you'd like to write fractran but have it compile to machine code.
+Both use prime factorised representations of numbers internally.
+
+I would like to recommend reading Michael Malis' [excellent article](https://malisper.me/building-fizzbuzz-fractran-bottom/) on writing a compiler that _targets_ FRACTRAN.
+
 ## :rotating_light: Limitations
-Currently `FRACTRAN_rs` is limited to working with `usize`s as numerators and denominators of fractions. This is to keep the codebase to under 100 LOC.
+Currently `FRACTRAN_rs` is limited to working with `usize`s as numerators and denominators of fractions. This is to keep the codebase to under 100 LOC. Besides, 64 bits (at time of writing) should be enough for anyone.
 
 Due to the current economic climate, all `FRACTRAN_rs` programs must be finite.
 
