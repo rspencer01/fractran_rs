@@ -1,5 +1,6 @@
 # ➗ `FRACTRAN_rs` ➗
-![crates.io version](https://img.shields.io/crates/v/fractran_rs)
+[![crates.io version](https://img.shields.io/crates/v/fractran_rs)](https://crates.io/crates/fractran_rs)
+[![docs](https://img.shields.io/docsrs/fractran_rs)](https://docs.rs/fractran_rs/latest/fractran_rs/)
 ![MIT Licence](https://img.shields.io/github/license/rspencer01/fractran_rs)
 [![Check and Lint](https://github.com/rspencer01/fractran_rs/actions/workflows/check-and-lint.yaml/badge.svg)](https://github.com/rspencer01/fractran_rs/actions/workflows/check-and-lint.yaml)
 [![Test](https://github.com/rspencer01/fractran_rs/actions/workflows/test.yaml/badge.svg)](https://github.com/rspencer01/fractran_rs/actions/workflows/test.yaml)
