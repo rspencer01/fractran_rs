@@ -14,18 +14,18 @@ It takes as input a natural number and either outputs another natural number or 
 To do this, take the input number `n` and compare it to each fraction `f` in turn. If `nf` is an integer, then restart the procedure with that number as input. If we reach the end of the list of fractions without that ever being an integer, halt.
 
 For example, here is a program that takes in a number and outputs its largest odd divisor.
-```
+```text
 1/2
 ```
 
 On the other hand, this program takes an input of the form 2<sup>a</sup>3<sup>b</sup> and outputs 5<sup>a+b</sup>.
-```
+```text
 5/2  5/3
 ```
 We could think of this as the program to add two numbers together.  Similarly the single instruction `5 / 6` takes 2<sup>a</sup>3<sup>b</sup> to 5<sup>max(a,b)</sup>.
 
 The most famous example of a FRACTRAN program is [PRIMEGAME](https://github.com/rspencer01/fractran_rs/tree/main/examples/primegame.rs):
-```
+```text
 17/91 78/85 19/51 23/38 29/33 77/29 95/23 77/19 1/17 11/13 13/11 15/2 1/7 55/1
 ```
 Given the input of 2, this program never halts, but every time it hits a power of two, it does so in the form 2<sup>p</sup> for successive primes p.
@@ -36,10 +36,8 @@ For examples of usage, see the [`examples`](https://github.com/rspencer01/fractr
 ```rust
 use fractran_rs::*;
 
-fn main() {
-    let program = fractran!(2/5, 3/5);
-    let result = program.run(24);
-}
+let program = fractran!(2/5 3/5);
+let result = program.run(24);
 ```
 
 On the other hand, you may wish to provide encoding and decoding to the natural numbers for arbitrary datatypes. For example here we consider a hypothetical "find in array" program:
