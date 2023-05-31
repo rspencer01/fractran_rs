@@ -34,45 +34,57 @@ Given the input of 2, this program never halts, but every time it hits a power o
 
 For examples of usage, see the [`examples`](https://github.com/rspencer01/fractran_rs/tree/main/examples) folder. Simple programs can be constructed as using the `fractran!` macro:
 ```rust
+#[macro_use]
 use fractran_rs::*;
 
-let program = fractran!(2/5 3/5);
+let program : FractranProgram<usize, usize> = fractran!(5/2 5/3);
 let result = program.run(24);
 ```
 
 On the other hand, you may wish to provide encoding and decoding to the natural numbers for arbitrary datatypes. For example here we consider a hypothetical "find in array" program:
-```rust
-struct Input(usize, &[usize]);
+```no_run
+#[macro_use]
+use fractran_rs::*;
 
-impl Into<usize> for Input {
-  ...
+struct Input<'a>(usize, &'a [usize]);
+
+impl<'a> Into<usize> for Input<'a> {
+  fn into(self) -> usize { todo!() }
 }
 
-struct Ouput(Option<usize>);
+struct Output(Option<usize>);
 
-impl From<usize for Output {
-  ...
+impl From<usize> for Output {
+  fn from(_: usize) -> Self { todo!() }
 }
 
 fn main() {
-    let program : FractranProgram<Input, Output> = fractran!(...);
+    let program : FractranProgram<Input, Output> = fractran!(/* ... */);
     let input = Input(3, &[2, 3, 5, 7, 11]);
     let result = program.run(input);
 }
 ```
 
 You can also "step through" your programs. To do this, call `start` on the program, followed by `next`:
-```rust
-let primegame = fractran!(...);
-let program_run = primegame.start(2);
+```no_run
+#[macro_use]
+use fractran_rs::*;
+
+let primegame : FractranProgram<usize, usize> = fractran!(/* ... */);
+let mut program_run = primegame.start(2);
 program_run.next(); // Some(15)
 program_run.next(); // Some(825)
-...
+// etc.
 ```
 This is implemented as an iterator interface, so you can run through the entire program with
-```rust
+```no_run
+#[macro_use]
+use fractran_rs::*;
+
+let program : FractranProgram = fractran!(/* ... */);
+
 for intermediate_result in program.start(3) {
-  ...
+  // ...
 }
 ```
 
