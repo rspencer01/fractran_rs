@@ -1,6 +1,7 @@
+#![no_std]
 #![macro_use]
 
-use std::marker::PhantomData;
+use core::marker::PhantomData;
 
 pub struct Fraction {
     pub num: usize,
