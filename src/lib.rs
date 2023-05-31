@@ -18,11 +18,7 @@ where
     _phantom: PhantomData<(I, O)>,
 }
 
-pub struct FractranRun<'a, I, O>
-where
-    I: Into<usize>,
-    O: From<usize>,
-{
+pub struct FractranRun<'a, I: Into<usize>, O: From<usize>> {
     current: usize,
     program: &'a FractranProgram<'a, I, O>,
 }
@@ -54,11 +50,7 @@ macro_rules! fractran {
     };
 }
 
-impl<'a, I, O> Iterator for FractranRun<'a, I, O>
-where
-    I: Into<usize>,
-    O: From<usize>,
-{
+impl<'a, I: Into<usize>, O: From<usize>> Iterator for FractranRun<'a, I, O> {
     type Item = usize;
 
     fn next(&mut self) -> Option<Self::Item> {
