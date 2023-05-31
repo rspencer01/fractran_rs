@@ -1,4 +1,4 @@
-# :heavy_division_sign: `FRACTRAN_rs` :heavy_division_sign:
+# ➗ `FRACTRAN_rs` ➗
 ![crates.io version](https://img.shields.io/crates/v/fractran_rs)
 ![MIT Licence](https://img.shields.io/github/license/rspencer01/fractran_rs)
 [![Check and Lint](https://github.com/rspencer01/fractran_rs/actions/workflows/check-and-lint.yaml/badge.svg)](https://github.com/rspencer01/fractran_rs/actions/workflows/check-and-lint.yaml)
@@ -7,7 +7,7 @@
 
 > Because why not?
 
-## :scroll: The Language
+## 📜 The Language
 
 Each FRACTRAN program consists of a finite ordered tuple of positive rational numbers (fractions).
 It takes as input a natural number and either outputs another natural number or does not halt.
@@ -30,7 +30,7 @@ The most famous example of a FRACTRAN program is [PRIMEGAME](https://github.com/
 ```
 Given the input of 2, this program never halts, but every time it hits a power of two, it does so in the form 2<sup>p</sup> for successive primes p.
 
-## :unicorn: Using `FRACTRAN_rs`
+## 🦄 Using `FRACTRAN_rs`
 
 For examples of usage, see the [`examples`](https://github.com/rspencer01/fractran_rs/tree/main/examples) folder. Simple programs can be constructed as using the `fractran!` macro:
 ```rust
@@ -78,16 +78,16 @@ for intermediate_result in program.start(3) {
 }
 ```
 
-## :art: Prior art and alternatives
+## 🎨 Prior art and alternatives
 You may be intersted in [`fractran`](https://crates.io/crates/fractran) and [`fractran_macros`](https://crates.io/crates/fractran_macros) if you'd like to write fractran but have it compile to machine code.
 Both use prime factorised representations of numbers internally.
 
 I would like to recommend reading Michael Malis' [excellent article](https://malisper.me/building-fizzbuzz-fractran-bottom/) on writing a compiler that _targets_ FRACTRAN.
 
-## :rotating_light: Limitations
+## 🚨 Limitations
 Currently `FRACTRAN_rs` is limited to working with `usize`s as numerators and denominators of fractions. This is to keep the codebase to under 100 LOC. Besides, 64 bits (at time of writing) should be enough for anyone.
 
 Due to the current economic climate, all `FRACTRAN_rs` programs must be finite.
 
-## :woman_technologist: Contributing
+## 👩🏼‍💻 Contributing
 FRACTRAN_rs is considered feature-complete by the author. However, pull requests to fix bugs or suggest new features are welcome.
