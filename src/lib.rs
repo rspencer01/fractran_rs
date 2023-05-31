@@ -1,8 +1,9 @@
 #![no_std]
 #![macro_use]
 
-use core::marker::PhantomData;
+use core::{iter::FusedIterator, marker::PhantomData};
 
+#[derive(Copy, Clone)]
 pub struct Fraction {
     pub num: usize,
     pub den: usize,
@@ -73,3 +74,5 @@ where
         next
     }
 }
+
+impl<'a, I: Into<usize>, O: From<usize>> FusedIterator for FractranRun<'a, I, O> {}
